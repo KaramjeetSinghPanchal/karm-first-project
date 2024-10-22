@@ -43,8 +43,12 @@ export default function Signup() {
         console.log(data);
       };
       
+<<<<<<< HEAD
    
       setphone("");
+=======
+      alert("hello from karm")
+>>>>>>> 062f9f0c5bf99ef20e5d399aab21cceb3688ad9e
      
       alert("Data submitted successfully!");
     }
