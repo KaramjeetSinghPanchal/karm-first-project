@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -13,7 +13,18 @@ import Signupdetails from "@/components/mycomponent/Signupdetails";
 import Button from "@/components/mycomponent/Button";
 import Signupbutton from "@/components/mycomponent/SignupButton";
 import Socialbutton from "@/components/mycomponent/Socialbutton";
-export default function Signup() {
+import { runOnJS } from "react-native-reanimated";
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type Listingprops = {
+  navigation: NativeStackNavigationProp<{
+    Login: undefined;
+    Signup: undefined;
+  }>;
+};
+
+
+export default function Login({navigation}:Listingprops) {
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
   const [phone, setphone] = useState("");
@@ -36,20 +47,22 @@ export default function Signup() {
 
       return;
     } else {
-
-      const getdata = async () => {
-        let result = await fetch("https://jsonplaceholder.org/posts");
-        const data = await result.json();
-        console.log(data);
-      };
- 
-     alert("Main branch")
       alert("Data submitted successfully!");
+      navigation.navigate('Listing')
     }
   };
 
+  const getdata = async () => {
+   
+    const url = "http://127.0.0.1:3000/user";
+    let result = await fetch(url);
+    result = await result.json();
+    console.warn(result)
+  };
 
-
+  useEffect(() => {
+    getdata();
+  }, []);
 
   return (
     <>
