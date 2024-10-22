@@ -46,7 +46,7 @@ export default function Signup() {
       setname("");
       setemail("");
       setphone("");
-      setpassword("");
+     
       alert("Data submitted successfully!");
     }
   };
