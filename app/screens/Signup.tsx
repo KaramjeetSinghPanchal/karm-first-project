@@ -43,10 +43,7 @@ export default function Signup() {
         console.log(data);
       };
       
-      setname("");
-      setemail("");
-      setphone("");
-      setpassword("");
+    
       alert("Data submitted successfully!");
     }
   };
