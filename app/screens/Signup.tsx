@@ -43,7 +43,9 @@ export default function Signup() {
         console.log(data);
       };
       
-  
+      setname("");
+      setemail("");
+      setphone("");
      
       alert("Data submitted successfully!");
     }
