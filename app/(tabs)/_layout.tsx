@@ -4,9 +4,13 @@ import React from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
-
+import { createStackNavigator } from '@react-navigation/stack';
+import Signup from '../screens/Signup';
+import Login from '../screens/Login';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const Stack = createStackNavigator();
 
   return (
     <Tabs
@@ -33,5 +37,7 @@ export default function TabLayout() {
         }}
       />
     </Tabs>
+
+
   );
 }
