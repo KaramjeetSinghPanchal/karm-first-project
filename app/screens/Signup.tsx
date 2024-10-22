@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Listing from "./Listing";
 import {
   View,
   Text,
@@ -48,7 +49,7 @@ export default function Login({navigation}:Listingprops) {
       return;
     } else {
       alert("Data submitted successfully!");
-      navigation.navigate('Listing')
+      
     }
   };
 
@@ -97,7 +98,7 @@ export default function Login({navigation}:Listingprops) {
         </View>
 
         <View>
-          <Signupbutton title={"Sign Up"} onPress={submitdata} />
+          <Signupbutton title={"Sign Up"} onPress={()=>navigation.navigate('Listing')} />
         </View>
 
         <View style={style.container}>
