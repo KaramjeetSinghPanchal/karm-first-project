@@ -43,7 +43,8 @@ export default function Signup() {
         console.log(data);
       };
       
-    
+      
+     
       alert("Data submitted successfully!");
     }
   };
