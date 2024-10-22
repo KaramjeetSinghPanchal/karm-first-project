@@ -43,7 +43,7 @@ export default function Signup() {
         console.log(data);
       };
       
-      
+      alert("hello from karm")
      
       alert("Data submitted successfully!");
     }
