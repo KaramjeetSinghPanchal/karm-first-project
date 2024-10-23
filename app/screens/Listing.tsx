@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ActivityIndicator } from "react-native";
-
+import { View, Text, ActivityIndicator,Button } from "react-native";
+import { StyleSheet } from "react-native";
 interface Myapp {
   id: number;
   name: string;
@@ -37,18 +37,49 @@ export default function Listing() {
   }
 
   return (
-    <View>
+<>
+    <View style={{flexDirection:'row',borderWidth:3,backgroundColor:'green'}}> 
+      <Text style={{flex:1,fontSize:20}}>Name</Text>
+      <Text style={{flex:1,fontSize:20}}>Email</Text>
+      <Text style={{flex:1.2,fontSize:20}}>Oprations</Text>
+    </View>
+
+    <View style={style.continer}>
+      
       {data ? (
         data.map((itm) => (
-          <View key={itm.id} style={{borderColor:'red',borderWidth:10,padding:5}}>
-            <Text>{itm.name}</Text>
-            <Text>{itm.age}</Text>
-            <Text>{itm.email}</Text>
+          <View key={itm.id} style={style.list}>
+            <Text style={style.continer}>{itm.name}</Text>
+            <Text style={style.contineremail}>{itm.email}</Text>
+            <Text style={style.btn}><Button title = 'Delete'/></Text>
+            <Text style={style.btn}><Button title = 'Update'/></Text>
           </View>
         ))
       ) : (
         <Text>No data available</Text>
       )}
     </View>
+
+    </>
   );
+  
 }
+
+const style = StyleSheet.create({
+  continer:{
+      flex:1.4
+  },
+  btn:{
+    flex:1.1,
+    fontSize:2
+
+  },
+  contineremail :{
+    flex:1.5,
+   
+  },
+  list:{
+    flexDirection: 'row',
+    justifyContent:'space-between',borderColor:'red',borderWidth:3,padding:2,backgroundColor:'orange'
+  }
+})
