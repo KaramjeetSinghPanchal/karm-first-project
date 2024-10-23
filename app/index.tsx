@@ -9,9 +9,20 @@ const Stack = createNativeStackNavigator();
 export default function HomeScreen() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+     <Stack.Navigator
+        initialRouteName="Login"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#f4511e', 
+          },
+          headerTintColor: '#fff', 
+          headerTitleStyle: {
+            fontWeight: 'bold', 
+          },
+        }}
+      >
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen name="Signup" component={Signup}/>
         <Stack.Screen name="Listing" component={Listing} />
       </Stack.Navigator>
     </NavigationContainer>
