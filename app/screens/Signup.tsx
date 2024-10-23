@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Listing from "./Listing";
 import {
   View,
@@ -42,28 +42,18 @@ export default function Login({navigation}:Listingprops) {
     );
   }
 
-  const submitdata = () => {
-    if (!name || !email || !phone || !password) {
-      alert("Please fill all fields");
+  // const submitdata = () => {
+  //   if (!name || !email || !phone || !password) {
+  //     alert("Please fill all fields");
 
-      return;
-    } else {
-      alert("Data submitted successfully!");
+  //     return;
+  //   } else {
+  //     alert("Data submitted successfully!");
       
-    }
-  };
+  //   }
+  // };
+  
 
-  const getdata = async () => {
-   
-    const url = "http://127.0.0.1:3000/user";
-    let result = await fetch(url);
-    result = await result.json();
-    console.warn(result)
-  };
-
-  useEffect(() => {
-    getdata();
-  }, []);
 
   return (
     <>
