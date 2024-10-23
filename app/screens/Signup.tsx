@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   Image,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { StyleSheet } from "react-native";
 import { useFonts } from "expo-font";
@@ -15,7 +16,7 @@ import Button from "@/components/mycomponent/Button";
 import Signupbutton from "@/components/mycomponent/SignupButton";
 import Socialbutton from "@/components/mycomponent/Socialbutton";
 import { runOnJS } from "react-native-reanimated";
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type Listingprops = {
   navigation: NativeStackNavigationProp<{
@@ -24,12 +25,16 @@ type Listingprops = {
   }>;
 };
 
-
-export default function Login({navigation}:Listingprops) {
+export default function Login({ navigation }: Listingprops) {
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
   const [phone, setphone] = useState("");
   const [password, setpassword] = useState("");
+  const [errorname, setnameerror] = useState(false);
+  const [erroremail, setemailerror] = useState(false);
+  const [errorphone, setphoneerror] = useState(false);
+  const [errorpassword, setpassworderror] = useState(false);
+
   const [fontsLoaded] = useFonts({
     "Manrope-Bold": require("../../assets/fonts/Manrope-Bold.ttf"),
   });
@@ -42,18 +47,58 @@ export default function Login({navigation}:Listingprops) {
     );
   }
 
-  // const submitdata = () => {
-  //   if (!name || !email || !phone || !password) {
-  //     alert("Please fill all fields");
+  const addData = async () => {
+ 
+    // if(!name || !email || !password || !phone)
+    // {
+    //   return fal
+    // }
+      // Alert.alert("Please fill all the fields");
+      if(!name)
+      {
+        setnameerror(true)
+      }else{
+        setnameerror(false)
+      }
+      if(!email)
+        {
+          setemailerror(true)
+        }else{
+          setemailerror(false)
+        }
+        if(!phone)
+          {
+            setphoneerror(true)
+          }else{
+            setphoneerror(false)
+          }
+          if(!password)
+            {
+              setpassworderror(true)
+            }else{
+              setpassworderror(false)
+            }
 
-  //     return;
-  //   } else {
-  //     alert("Data submitted successfully!");
-      
-  //   }
-  // };
-  
+    
+    if(name.length>0 && email.length>0 && phone.length>0 && password.length>0)
+    {
+      const url = "http://127.0.0.1:3000/user";
+      let result = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phone, password }),
+      });
+      result = await result.json();
 
+      if (result) {
+        Alert.alert("Data Added Successfully");
+        setname("");
+        setemail("");
+        setphone("");
+        setpassword("");
+      }
+    }
+  };
 
   return (
     <>
@@ -80,15 +125,30 @@ export default function Login({navigation}:Listingprops) {
             email={"Enter your email"}
             phone={"Enter Your Phone Number"}
             password={"Enter Your Password"}
+            valuename={name}
+            valueemail={email}
+            valuephone={phone}
+            valuepassword={password}
             setname={setname}
             setemail={setemail}
             setphone={setphone}
             setpassword={setpassword}
+            errorname={errorname}
+            erroremail={erroremail}
+            errorphone={errorphone}
+            errorpassword={errorpassword}
+
           />
         </View>
 
         <View>
-          <Signupbutton title={"Sign Up"} onPress={()=>navigation.navigate('Listing')} />
+          <Signupbutton title={"Sign Up"} onPress={addData} />
+        </View>
+        <View>
+          <Signupbutton
+            title={"All records"}
+            onPress={() => navigation.navigate("Listing")}
+          />
         </View>
 
         <View style={style.container}>

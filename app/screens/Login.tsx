@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native";
 import Loginsdetails from "@/components/mycomponent/Loginsdetails";
 import { SplashScreen } from "expo-router";
 import Button from "@/components/mycomponent/Button";
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 type LoginScreenProps = {
   navigation: NativeStackNavigationProp<{
     Login: undefined;
@@ -13,7 +13,7 @@ type LoginScreenProps = {
   }>;
 };
 
-export default function Login({navigation}:LoginScreenProps) {
+export default function Login({ navigation }: LoginScreenProps) {
   let [fontsLoaded] = useFonts({
     "Outfit-Medium": require("../../assets/fonts/static/Outfit-Medium.ttf"),
   });
@@ -21,7 +21,7 @@ export default function Login({navigation}:LoginScreenProps) {
   const onPressLogin = () => {
     console.warn("Login");
   };
- 
+
   return (
     <SafeAreaView style={{ flex: 1, marginTop: 1, alignItems: "center" }}>
       <View>
