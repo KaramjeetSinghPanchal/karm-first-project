@@ -11,7 +11,7 @@ interface Myapp {
 
 export default function Listing() {
   const [data, setData] = useState<Myapp[] | undefined>(undefined);
-  const [showModel,setShowModal] =useState(false)
+  const [showModel, setShowModal] = useState(false);
   const [userdata, setUserdata] = useState();
 
   // const [loading, setLoading] = useState<boolean>(true);
@@ -47,16 +47,14 @@ export default function Listing() {
 
     if (result) {
       console.warn("user deleted");
+      getData()
     }
   };
 
-  const updatedata = (dat:any)=>
-  {
-  
-    
-    setShowModal(true)
-    setUserdata(dat)    
-  }
+  const updatedata = (dat: any) => {
+    setShowModal(true);
+    setUserdata(dat);
+  };
 
   return (
     <>
@@ -72,10 +70,13 @@ export default function Listing() {
         <Text style={{ flex: 1.2, fontSize: 20 }}>Oprations</Text>
       </View>
 
-      <Modals showModel={showModel}
-       setShowModal={setShowModal}
-       userdata={userdata}
-       />
+      <Modals
+        showModel={showModel}
+        setShowModal={setShowModal}
+        userdata={userdata}
+        setData={setData}
+        getData={getData}
+      />
 
       <View style={style.continer}>
         {data ? (
@@ -87,7 +88,7 @@ export default function Listing() {
                 <Button title="Delete" onPress={() => deletedata(itm.id)} />
               </Text>
               <Text style={style.btn}>
-                <Button title="Update" onPress={()=>updatedata(itm)} />
+                <Button title="Update" onPress={() => updatedata(itm)} />
               </Text>
             </View>
           ))
