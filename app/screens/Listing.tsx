@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ActivityIndicator, Button } from "react-native";
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  Button,
+  FlatList,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
 import Modals from "@/components/mycomponent/Modals";
 interface Myapp {
@@ -13,6 +22,7 @@ export default function Listing() {
   const [data, setData] = useState<Myapp[] | undefined>(undefined);
   const [showModel, setShowModal] = useState(false);
   const [userdata, setUserdata] = useState();
+  // const [query, setQuery] = useState<string>('');
 
   // const [loading, setLoading] = useState<boolean>(true);
 
@@ -47,7 +57,17 @@ export default function Listing() {
 
     if (result) {
       console.warn("user deleted");
-      getData()
+      getData();
+    }
+  };
+  const searchData = async (text) => {
+    let url = `http://127.0.0.1:3000/user?q=${text}`;
+    let result = await fetch(url);
+    result = await result.json();
+    console.warn(result);
+
+    if (result) {
+      setData(result);
     }
   };
 
@@ -58,27 +78,52 @@ export default function Listing() {
 
   return (
     <>
+      <TextInput
+        style={style.input}
+        placeholder="Search Data"
+        placeholderTextColor={"black"}
+        onChangeText={(text) => {
+          // setQuery(text);
+          searchData(text);
+        }}
+        // value={query}
+      />
       <View
         style={{
           flexDirection: "row",
-          borderWidth: 3,
-          backgroundColor: "green",
+          borderWidth: 10,
+          backgroundColor: "#f5f0e1",
+          borderBlockColor: "#1e3d59",
+          padding: 10,
+          
         }}
       >
-        <Text style={{ flex: 1, fontSize: 20 }}>Name</Text>
-        <Text style={{ flex: 1, fontSize: 20 }}>Email</Text>
-        <Text style={{ flex: 1.2, fontSize: 20 }}>Oprations</Text>
+        <Text style={{ flex: 1, fontSize: 20,fontWeight:'bold' }}>Name</Text>
+        <Text style={{ flex: 1, fontSize: 20 ,fontWeight:'bold'}}>Email</Text>
+        <Text style={{ flex: 1.2, fontSize: 20 ,fontWeight:'bold'}}>Oprations</Text>
       </View>
 
-      <Modals
-        showModel={showModel}
-        setShowModal={setShowModal}
-        userdata={userdata}
-        setData={setData}
-        getData={getData}
+      <FlatList
+        data={data}
+        renderItem={({ item }) => (
+          <View style={style.list}>
+            <Text style={style.continer}>{item.name}</Text>
+            <Text style={style.contineremail}>{item.email}</Text>
+            <Text style={style.btndelete}>
+              <TouchableOpacity onPress={() => deletedata(item.id)}>
+                <AntDesign name="delete" size={25} color="black" />
+              </TouchableOpacity>
+            </Text>
+            <Text style={style.btnupdate}>
+              <TouchableOpacity onPress={() => updatedata(item)}>
+                <AntDesign name="edit" size={25} color="black" />
+              </TouchableOpacity>
+            </Text>
+          </View>
+        )}
       />
 
-      <View style={style.continer}>
+      {/* <View style={style.continer}>
         {data ? (
           data.map((itm) => (
             <View key={itm.id} style={style.list}>
@@ -95,7 +140,15 @@ export default function Listing() {
         ) : (
           <Text>No data available</Text>
         )}
-      </View>
+      </View> */}
+
+      <Modals
+        showModel={showModel}
+        setShowModal={setShowModal}
+        userdata={userdata}
+        setData={setData}
+        getData={getData}
+      />
     </>
   );
 }
@@ -103,10 +156,17 @@ export default function Listing() {
 const style = StyleSheet.create({
   continer: {
     flex: 1.4,
+
   },
-  btn: {
-    flex: 1.1,
+  btndelete: {
+    flex: 1,
     fontSize: 2,
+    marginRight: -30,
+  },
+  btnupdate: {
+    flex: 1,
+    fontSize: 2,
+    marginRight: -50,
   },
   contineremail: {
     flex: 1.5,
@@ -114,9 +174,19 @@ const style = StyleSheet.create({
   list: {
     flexDirection: "row",
     justifyContent: "space-between",
-    borderColor: "red",
+    borderColor: "#1e3d59",
     borderWidth: 3,
     padding: 2,
-    backgroundColor: "orange",
+    backgroundColor: "#f5f0e1",
+    height:70
+  },
+  input: {
+    height: 40,
+
+    width: 380,
+    borderColor: "black",
+    borderWidth: 3,
+    // marginBottom: 20,
+    paddingHorizontal: 10,
   },
 });
