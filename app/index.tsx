@@ -13,9 +13,9 @@ export default function HomeScreen() {
         initialRouteName="Login"
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#f4511e', 
+            // backgroundColor: '#f4511e', 
           },
-          headerTintColor: '#fff', 
+          // headerTintColor: '#fff', 
           headerTitleStyle: {
             fontWeight: 'bold', 
           },

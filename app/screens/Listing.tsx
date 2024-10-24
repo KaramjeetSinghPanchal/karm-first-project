@@ -11,6 +11,7 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
 import Modals from "@/components/mycomponent/Modals";
+
 interface Myapp {
   id: number;
   name: string;
@@ -24,14 +25,14 @@ export default function Listing() {
   const [userdata, setUserdata] = useState();
   // const [query, setQuery] = useState<string>('');
 
-  // const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     getData();
   }, []);
 
   const getData = async () => {
-    // setLoading(true);
+    setLoading(true);
     const url = "http://127.0.0.1:3000/user";
     const response = await fetch(url);
     if (!response.ok) {
@@ -39,16 +40,19 @@ export default function Listing() {
     }
     const result: Myapp[] = await response.json();
     setData(result);
-    // setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    
   };
 
-  // if (loading) {
-  //   return (
-  //     <View>
-  //       <ActivityIndicator size="large" color="#0000ff" />
-  //     </View>
-  //   );
-  // }
+  if (loading) {
+    return (
+      <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
 
   const deletedata = async (id: number) => {
     let url = `http://127.0.0.1:3000/user/${id}`;
@@ -178,7 +182,7 @@ const style = StyleSheet.create({
     borderWidth: 3,
     padding: 2,
     backgroundColor: "#f5f0e1",
-    height:70
+    height:60
   },
   input: {
     height: 40,
