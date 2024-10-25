@@ -160,6 +160,7 @@ export default function Listing() {
 const style = StyleSheet.create({
   continer: {
     flex: 1.4,
+    fontSize:17
 
   },
   btndelete: {

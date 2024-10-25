@@ -48,40 +48,33 @@ export default function Login({ navigation }: Listingprops) {
   }
 
   const addData = async () => {
- 
-    // if(!name || !email || !password || !phone)
-    // {
-    //   return fal
-    // }
-      // Alert.alert("Please fill all the fields");
-      if(!name)
-      {
-        setnameerror(true)
-      }else{
-        setnameerror(false)
-      }
-      if(!email)
-        {
-          setemailerror(true)
-        }else{
-          setemailerror(false)
-        }
-        if(!phone)
-          {
-            setphoneerror(true)
-          }else{
-            setphoneerror(false)
-          }
-          if(!password)
-            {
-              setpassworderror(true)
-            }else{
-              setpassworderror(false)
-            }
+    if (!name) {
+      setnameerror(true);
+    } else {
+      setnameerror(false);
+    }
+    if (!email) {
+      setemailerror(true);
+    } else {
+      setemailerror(false);
+    }
+    if (!phone) {
+      setphoneerror(true);
+    } else {
+      setphoneerror(false);
+    }
+    if (!password) {
+      setpassworderror(true);
+    } else {
+      setpassworderror(false);
+    }
 
-    
-    if(name.length>0 && email.length>0 && phone.length>0 && password.length>0)
-    {
+    if (
+      name.length > 0 &&
+      email.length > 0 &&
+      phone.length > 0 &&
+      password.length > 0
+    ) {
       const url = "http://127.0.0.1:3000/user";
       let result = await fetch(url, {
         method: "POST",
@@ -137,7 +130,6 @@ export default function Login({ navigation }: Listingprops) {
             erroremail={erroremail}
             errorphone={errorphone}
             errorpassword={errorpassword}
-
           />
         </View>
 
